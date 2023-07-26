@@ -19,8 +19,6 @@ jobs:
             python -c '
             import requests
             import os
-            import urllib3
-            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
             # Replace these with your actual client credentials from the OAuth provider
