@@ -61,7 +61,6 @@ jobs:
             import os
             import urllib3
             urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-            print(access_token)
 
 
             def get_jira_project_info(base_url, access_token):
