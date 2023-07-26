@@ -1,0 +1,93 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: python:3.8
+
+    steps:
+      - checkout
+
+      # Install dependencies
+      - run:
+          name: Install requests library
+          command: pip install requests
+
+      # Step 1: Create access token
+      - run:
+          name: Create Access Token
+          command: |
+            python - <<EOF
+            import requests
+
+            # Replace these with your actual client credentials from the OAuth provider
+            client_id = 'Wwq8AIgTXkD69jFY7B78d9vTlf6CYUg1'
+            client_secret = 'ATOA4L9yrz3UoZjY0KzYh28NmErwoYXvMJi0SeSilwRwkmIlU3utQ9F4Z1_hUEKKw6c71D2D611E'
+
+            # The token endpoint URL provided by the OAuth provider
+            token_endpoint = 'https://auth.atlassian.com/oauth/token'
+
+            # Request an access token using client credentials
+            data = {
+                'grant_type': 'client_credentials',
+                'client_id': client_id,
+                'client_secret': client_secret
+            }
+
+            response = requests.post(token_endpoint, data=data)
+
+            if response.status_code == 200:
+                # Access token obtained successfully
+                access_token = response.json()['access_token']
+                print(f"::set-env name=JIRA_ACCESS_TOKEN::{access_token}")
+            else:
+                print("Error obtaining access token:", response.json())
+            EOF
+
+      # Step 2: Get Jira Project Details
+      - run:
+          name: Get Jira Project Details
+          command: |
+            python - <<EOF
+            import requests
+
+            def get_jira_project_info(base_url, access_token):
+                # Set up the headers with the OAuth 2.0 access token
+                headers = {
+                    "Authorization": f"Bearer {access_token}",
+                    "Content-Type": "application/json"
+                }
+
+                try:
+                    # Make the API request to fetch project information
+                    response = requests.get(base_url, headers=headers, verify=False)
+
+                    # Check if the request was successful (status code 200)
+                    if response.status_code == 200:
+                        project_info = response.json()
+                        return project_info
+                    else:
+                        print(f"Failed to get project info. Status code: {response.status_code}")
+                        return None
+
+                except requests.exceptions.RequestException as e:
+                    print(f"Error occurred: {e}")
+                    return None
+
+            if __name__ == "__main__":
+                # Replace these variables with your actual values
+                base_url = "https://api.atlassian.com/ex/jira/b7ca1f0f-e1f1-434a-97f8-74f5ce43b6a9/rest/api/3/issue/KAN-6"
+                access_token = os.environ.get('JIRA_ACCESS_TOKEN')
+
+                project_info = get_jira_project_info(base_url, access_token)
+                if project_info:
+                    print(project_info)
+                    print(".............")
+                    print("Project Info:")
+                    print("Project Name:", project_info.get("name"))
+                    print("project id:", project_info.get("id"))
+                    print("Project Key:", project_info.get("key"))
+                    print("Project Description:", project_info.get("description"))
+                    # Add more project information as needed
+                else:
+                    print("Failed to fetch project information.")
+            EOF
