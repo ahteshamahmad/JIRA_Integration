@@ -85,6 +85,7 @@ jobs:
                 # Replace these variables with your actual values
                 base_url = "https://api.atlassian.com/ex/jira/b7ca1f0f-e1f1-434a-97f8-74f5ce43b6a9/rest/api/3/issue/KAN-1"
                 access_token = os.environ.get("JIRA_ACCESS_TOKEN")
+                print(access_token)
 
                 project_info = get_jira_project_info(base_url, access_token)
                 if project_info:
