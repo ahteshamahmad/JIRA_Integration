@@ -56,6 +56,7 @@ jobs:
             import os
             import urllib3
             urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+            access_token = os.environ.get("JIRA_ACCESS_TOKEN")
             print(access_token)
 
 
