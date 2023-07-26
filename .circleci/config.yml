@@ -19,6 +19,9 @@ jobs:
             python -c '
             import requests
             import os
+            import urllib3
+            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 
             # Replace these with your actual client credentials from the OAuth provider
             client_id = "Wwq8AIgTXkD69jFY7B78d9vTlf6CYUg1"
@@ -51,6 +54,9 @@ jobs:
             python -c '
             import requests
             import os
+            import urllib3
+            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 
             def get_jira_project_info(base_url, access_token):
                 # Set up the headers with the OAuth 2.0 access token
