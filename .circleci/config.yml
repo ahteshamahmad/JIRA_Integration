@@ -18,6 +18,7 @@ jobs:
           command: |
             python -c '
             import requests
+            import os
 
             # Replace these with your actual client credentials from the OAuth provider
             client_id = "Wwq8AIgTXkD69jFY7B78d9vTlf6CYUg1"
@@ -49,6 +50,7 @@ jobs:
           command: |
             python -c '
             import requests
+            import os
 
             def get_jira_project_info(base_url, access_token):
                 # Set up the headers with the OAuth 2.0 access token
