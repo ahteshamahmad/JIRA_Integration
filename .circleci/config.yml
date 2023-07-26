@@ -41,13 +41,13 @@ jobs:
                 print(f"::set-env name=JIRA_ACCESS_TOKEN::{access_token}")
             else:
                 print("Error obtaining access token:", response.json())
-            EOF
+            '
 
       # Step 2: Get Jira Project Details
       - run:
           name: Get Jira Project Details
           command: |
-            python - <<EOF
+            python -c '
             import requests
 
             def get_jira_project_info(base_url, access_token):
