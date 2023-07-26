@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Create Access Token
           command: |
-            python - <<EOF
+            python - '<<EOF
             import requests
 
             # Replace these with your actual client credentials from the OAuth provider
@@ -90,4 +90,4 @@ jobs:
                     # Add more project information as needed
                 else:
                     print("Failed to fetch project information.")
-            EOF
+            EOF'
