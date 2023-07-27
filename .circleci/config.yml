@@ -45,10 +45,10 @@ jobs:
             else:
                 print("Error obtaining access token:", response.json())
             '
-      - persist_to_workspace:
-          root: .  # The root directory where the access_token.txt file is located
-          paths:
-            - access_token.txt
+    #   - persist_to_workspace:
+    #       root: .  # The root directory where the access_token.txt file is located
+    #       paths:
+    #         - access_token.txt
 
       # Step 2: Get Jira Project Details
       - run:
