@@ -16,7 +16,7 @@ import os
                 "client_secret": client_secret
             }
 
-            response = requests.post(token_endpoint, data=data)
+            response = requests.post(token_endpoint, data=data, verify=False)
 
             if response.status_code == 200:
                 # Access token obtained successfully
