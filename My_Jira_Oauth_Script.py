@@ -21,6 +21,7 @@ import os
             if response.status_code == 200:
                 # Access token obtained successfully
                 access_token = response.json()["access_token"]
-                print(f"::set-env name=JIRA_ACCESS_TOKEN::{access_token}")
+                with open("access_token.txt", "w") as f:
+                    f.write(access_token))
             else:
                 print("Error obtaining access token:", response.json())
