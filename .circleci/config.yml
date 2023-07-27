@@ -6,7 +6,7 @@ executors:
     docker:
       - image: cimg/python:3.9.13
 jobs:
-  jira_code_review: null
+  jira_code_review: 
     executor: python_executor
     steps:
       - checkout
