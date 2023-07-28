@@ -14,9 +14,9 @@ jobs:
       - run:
           name: Jira_Python_Script
           command: |
-            python -m pip install --upgrade pip
+#           python -m pip install --upgrade pip
             pip install requests
-            python Jira_Basic_Oauth_Script.py
+            python My_Jira_Oauth_Script.py
             python Jira_Oauth_Project_Details_Script.py
 workflows:
   bt_workflow:
