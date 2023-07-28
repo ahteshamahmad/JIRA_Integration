@@ -14,7 +14,6 @@ jobs:
       - run:
           name: Jira_Python_Script
           command: |
-#           python -m pip install --upgrade pip
             pip install requests
             python My_Jira_Oauth_Script.py
             python Jira_Oauth_Project_Details_Script.py
